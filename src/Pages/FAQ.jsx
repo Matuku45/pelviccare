@@ -59,7 +59,7 @@ const FAQ = () => {
         </nav>
 
         <h2 className="text-3xl text-center font-serif text-gray-800 mb-16 italic">
-          Pelvic Care FAQ's
+          Pelvic Care FAQs
         </h2>
 
         <div className="space-y-6">
