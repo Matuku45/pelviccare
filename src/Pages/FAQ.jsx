@@ -44,7 +44,7 @@ const FAQ = () => {
         
         <div className="relative z-10 bg-white/90 px-12 py-10 text-center max-w-xl mx-4 shadow-xl border-t-4 border-[#b89494]">
           <h1 className="text-4xl font-serif text-gray-800 tracking-tight italic">
-            Frequently Asked Questions
+            Frequently Asked Question
           </h1>
           <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mt-4 font-bold">
             Everything you need to know
