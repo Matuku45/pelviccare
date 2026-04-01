@@ -21,6 +21,18 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
+          <h3 className="font-semibold mb-3">LOCATION</h3>
+          <ul className="space-y-2 text-sm text-gray-200">
+            <li>Address: 247 Burger St Pretoria North, Pretoria, 0116</li>
+          </ul>
+
+      
+        </div>
+
+       
+       
+       
+        <div>
           <h3 className="font-semibold mb-3">QUICK LINKS</h3>
           <ul className="space-y-2 text-sm text-gray-200">
             <li>Pelvic Care Chair</li>
@@ -39,15 +51,10 @@ export default function Footer() {
 
         {/* Locations */}
         <div>
-          <h3 className="font-semibold mb-3">OUR LOCATIONS</h3>
+          <h3 className="font-semibold mb-3">Contact</h3>
           <ul className="space-y-2 text-sm text-gray-200">
-            <li>Free State</li>
-            <li>Eastern Cape</li>
-            <li>Gauteng</li>
-            <li>KwaZulu-Natal</li>
-            <li>Limpopo</li>
-            <li>North West</li>
-            <li>Western Cape</li>
+            <li><strong>Phone : </strong> 0761518353</li>
+           
           </ul>
         </div>
 
