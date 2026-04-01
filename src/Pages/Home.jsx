@@ -64,33 +64,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-[#707070] selection:bg-[#b48c8e]/20">
       
-      {/* NAVIGATION */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 px-6 md:px-12 py-4 flex justify-between items-center">
-        <div className="flex flex-col">
-          <Link to="/">
-            <h1 className="text-2xl font-serif tracking-[0.2em] text-black uppercase leading-tight">
-              Pelvic <span className="italic font-light lowercase text-[#b48c8e]">Care</span>
-            </h1>
-          </Link>
-          <p className="text-[9px] tracking-[0.3em] uppercase text-gray-400 font-bold">Move with confidence</p>
-        </div>
-        
-        <div className="hidden lg:flex items-center gap-8 text-[11px] font-bold tracking-widest uppercase text-black">
-          <Link to="/" className={`transition-colors hover:text-[#b48c8e] ${isActive('/') ? 'border-b border-black' : ''}`}>Home</Link>
-          <Link to="/about" className={`transition-colors hover:text-[#b48c8e] ${isActive('/about') ? 'border-b border-black' : ''}`}>About</Link>
-          <Link to="/women" className={`transition-colors hover:text-[#b48c8e] ${isActive('/women') ? 'border-b border-black' : ''}`}>Care For Women</Link>
-          <Link to="/men" className={`transition-colors hover:text-[#b48c8e] ${isActive('/men') ? 'border-b border-black' : ''}`}>Care For Men</Link>
-          <Link to="/chair" className={`transition-colors hover:text-[#b48c8e] ${isActive('/chair') ? 'border-b border-black' : ''}`}>Pelvic Chair</Link>
-          <Link to="/blog" className={`transition-colors hover:text-[#b48c8e] ${isActive('/blog') ? 'border-b border-black' : ''}`}>Blog</Link>
-          <Link to="/faq" className={`transition-colors hover:text-[#b48c8e] ${isActive('/blog') ? 'border-b border-black' : ''}`}>FAQ</Link>
-          <Link to="/book">
-            <button className="bg-[#b48c8e] text-white px-6 py-3 hover:bg-[#a37b7d] transition-all shadow-sm rounded-sm">
-              BOOK NOW | CONTACT US
-            </button>
-          </Link>
-        </div>
-        <Menu className="lg:hidden text-black cursor-pointer" />
-      </nav>
+   
 
       {/* HERO SECTION */}
       <section className="relative h-[550px] flex items-center justify-center bg-[#f8f5f2]">
