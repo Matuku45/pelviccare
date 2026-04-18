@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   CheckCircle, 
-  ArrowRight, 
-  Star, 
   MapPin, 
-  Menu 
+  Phone,
+  X
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -20,12 +19,18 @@ import follow8 from '../assets/follow8.jpg';
 
 // Core Page Assets
 import homeHeroImg from '../assets/homeCouresel.png';
-import homeSubImg from '../assets/homepictureAfterCouresel.png';
+import homeSubImg from '../assets/homepictureAfterCouresel.webp';
 import comparisonImg from '../assets/chairvskegels.png';
 
 const Home = () => {
   const location = useLocation();
-  const isActive = (path) => location.pathname === path;
+  const [showAd, setShowAd] = useState(false);
+
+  // Trigger the "Contact Pop" after 2 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowAd(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const followImages = [
     follow1, follow2, follow3, follow4, 
@@ -43,39 +48,49 @@ const Home = () => {
     "Sexual health for women (decrease or loss of sensation)"
   ];
 
-  const testimonials = [
-    { 
-      name: "Cherry Ferreira", 
-      time: "5 months ago", 
-      text: "My first consultation was incredibly informative and I now understand why I am suffering, shame GP's don't explain the various options that are available rather than just prescribe meds." 
-    },
-    { 
-      name: "Janine Barnard", 
-      time: "6 months ago", 
-      text: "What a find! This intervention has been a game-changer for me and I've avoided unnecessary surgery. 💃" 
-    },
-    { 
-      name: "Melissa Hartogh", 
-      time: "7 months ago", 
-      text: "I started at Winc Wellness 2 months ago... now after all my treatments/physio at Winc Wellness and Pelvic Centre I am walking without almost limping." 
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white font-sans text-[#707070] selection:bg-[#b48c8e]/20">
+    <div className="min-h-screen bg-white font-sans text-[#707070] selection:bg-[#b48c8e]/20 relative">
       
-   
+      {/* FLOATING CONTACT AD (The "Pop") */}
+      <div className={`fixed bottom-8 right-8 z-50 transition-all duration-700 transform ${showAd ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+        <div className="bg-black text-white p-1 rounded-full shadow-2xl flex items-center gap-4 pr-6 border border-white/20 group">
+          <div className="bg-[#b48c8e] p-4 rounded-full animate-pulse group-hover:animate-none">
+            <Phone size={20} className="text-white" />
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Contact Us Now</p>
+            <p className="text-lg font-serif italic text-white">076 151 8353</p>
+          </div>
+          <button 
+            onClick={() => setShowAd(false)}
+            className="ml-2 p-1 hover:bg-white/10 rounded-full transition-colors"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      </div>
 
-      {/* HERO SECTION */}
-      <section className="relative h-[550px] flex items-center justify-center bg-[#f8f5f2]">
-        <div className="absolute inset-0 overflow-hidden">
+      {/* HERO SECTION - Fixed to show the carousel image properly */}
+      <section className="relative h-[80vh] min-h-[500px] flex items-center justify-center bg-[#f8f5f2] overflow-hidden">
+        <div className="absolute inset-0">
           <img 
             src={homeHeroImg} 
             alt="Wellness Background" 
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover object-center"
           />
+          {/* Subtle overlay to help text readability if you add any later */}
+          <div className="absolute inset-0 bg-black/5"></div>
         </div>
-    
+        
+        {/* Optional: Hero Content Overlay */}
+        <div className="relative z-10 text-center px-6">
+          <h1 className="text-white text-5xl md:text-7xl font-serif italic drop-shadow-lg">
+            Reclaim Your Confidence
+          </h1>
+          <p className="text-white/90 mt-4 uppercase tracking-[0.4em] text-xs font-bold drop-shadow-md">
+            Pelvic Health Specialists
+          </p>
+        </div>
       </section>
 
       {/* MISSION SECTION */}
@@ -172,6 +187,6 @@ const Home = () => {
 
     </div>
   );
-};
+};    
 
 export default Home;

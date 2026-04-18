@@ -16,7 +16,7 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="group">
           <h1 className="text-lg md:text-xl font-serif text-gray-800">
-            Pelvic <span className="italic font-light">Care</span>
+            Restore Pelvic  <span className="italic font-light"> Health</span>
           </h1>
           <p className="text-[9px] md:text-[10px] tracking-widest text-gray-500 group-hover:text-[#c89b9b] transition">
             MOVE WITH CONFIDENCE

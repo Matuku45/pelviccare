@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Asset Imports
-import chairHero from '../assets/pelvicChair.png';
+import chairHero from '../assets/pelvicChair.webp';
 import comparisonImg from '../assets/chairvskegels.png';
 import sessionExpectationImg from '../assets/expectedDuringSession.png';
 // Using a placeholder or generic icon since specific small icons weren't in the list
