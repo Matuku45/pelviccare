@@ -13,27 +13,30 @@ let DefaultIcon = L.icon({
   iconSize: [25, 41],
   iconAnchor: [12, 41]
 });
+
 L.Marker.prototype.options.icon = DefaultIcon;
+
+// ✅ EMPTY FORM TEMPLATE (IMPORTANT FIX)
+const emptyForm = {
+  bookingId: Date.now(),
+  customerName: "",
+  email: "",
+  phone: "",
+  service: "",
+  date: "",
+  time: "",
+  status: "confirmed",
+  location: ""
+};
 
 const Book = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // ✅ NEW: progress bar state
   const [progress, setProgress] = useState(0);
 
-  const [formData, setFormData] = useState({
-    bookingId: Date.now(),
-    customerName: "Thabiso",
-    email: "thabiso@email.com",
-    phone: "0812345678",
-    service: "Doctor Appointment",
-    date: "2026-04-25",
-    time: "14:30",
-    status: "confirmed",
-    location: ""
-  });
+  // ✅ NOW FORM STARTS EMPTY
+  const [formData, setFormData] = useState(emptyForm);
 
   const locations = [
     {
@@ -53,22 +56,28 @@ const Book = () => {
     setLoading(true);
 
     setTimeout(() => {
-      setFormData({ ...formData, location: loc.address });
+      // reset form every time user opens booking
+      setFormData({
+        ...emptyForm,
+        location: loc.address
+      });
+
       setShowModal(true);
       setLoading(false);
-    }, 1500);
+    }, 800);
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  // ✅ UPDATED SUBMIT (ONLY ADDING PROGRESS)
   const handleSubmit = async () => {
     setProgress(0);
     setLoading(true);
 
-    // fake progress animation
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 90) {
@@ -77,7 +86,7 @@ const Book = () => {
         }
         return prev + 15;
       });
-    }, 150);
+    }, 120);
 
     try {
       await fetch(
@@ -93,12 +102,14 @@ const Book = () => {
 
       setTimeout(() => {
         alert("Booking saved successfully!");
+
         setShowModal(false);
+        setFormData(emptyForm); // reset after submit
         setProgress(0);
-      }, 500);
+      }, 400);
 
     } catch (error) {
-      console.error("Error saving booking:", error);
+      console.error(error);
       alert("Failed to save booking.");
       setProgress(0);
     } finally {
@@ -116,7 +127,7 @@ const Book = () => {
         </h1>
       </div>
 
-      {/* LOADING TOP BAR (UNCHANGED) */}
+      {/* LOADING BAR */}
       {loading && (
         <div className="fixed top-0 left-0 w-full z-50">
           <div className="h-1 bg-[#b89494] animate-pulse w-full"></div>
@@ -128,7 +139,9 @@ const Book = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-3 gap-8">
 
+        {/* LEFT PANEL */}
         <div className="space-y-6">
+
           <div className="bg-white p-4 rounded-xl shadow">
             <input
               type="text"
@@ -154,8 +167,10 @@ const Book = () => {
               </button>
             </div>
           ))}
+
         </div>
 
+        {/* MAP */}
         {!showModal && (
           <div className="lg:col-span-2 h-[500px] rounded-xl overflow-hidden border">
             <MapContainer
@@ -191,55 +206,53 @@ const Book = () => {
               <button onClick={() => setShowModal(false)}>✕</button>
             </div>
 
-            {/* ✅ PROGRESS BAR (NEW - INSIDE FORM) */}
+            {/* PROGRESS BAR */}
             <div className="w-full bg-gray-200 h-2">
               <div
-                className="h-2 bg-[#b89494] transition-all duration-300"
+                className="h-2 bg-[#b89494] transition-all"
                 style={{ width: `${progress}%` }}
-              ></div>
+              />
             </div>
 
             <div className="grid md:grid-cols-2">
 
-              {/* FORM (UNCHANGED) */}
+              {/* FORM */}
               <div className="p-6 space-y-4">
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">Full Name</label>
-                  <input name="customerName" value={formData.customerName} onChange={handleChange} className="w-full border p-2 rounded" />
-                </div>
+                <input name="customerName" placeholder="Full Name"
+                  value={formData.customerName} onChange={handleChange}
+                  className="w-full border p-2 rounded" />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">Email</label>
-                  <input name="email" value={formData.email} onChange={handleChange} className="w-full border p-2 rounded" />
-                </div>
+                <input name="email" placeholder="Email"
+                  value={formData.email} onChange={handleChange}
+                  className="w-full border p-2 rounded" />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">Phone</label>
-                  <input name="phone" value={formData.phone} onChange={handleChange} className="w-full border p-2 rounded" />
-                </div>
+                <input name="phone" placeholder="Phone"
+                  value={formData.phone} onChange={handleChange}
+                  className="w-full border p-2 rounded" />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">Service</label>
-                  <input name="service" value={formData.service} onChange={handleChange} className="w-full border p-2 rounded" />
-                </div>
+                <input name="service" placeholder="Service"
+                  value={formData.service} onChange={handleChange}
+                  className="w-full border p-2 rounded" />
 
                 <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-sm mb-1">Date</label>
-                    <input type="date" name="date" value={formData.date} onChange={handleChange} className="w-full border p-2 rounded" />
-                  </div>
 
-                  <div>
-                    <label className="block text-sm mb-1">Time</label>
-                    <input type="time" name="time" value={formData.time} onChange={handleChange} className="w-full border p-2 rounded" />
-                  </div>
+                  <input type="date" name="date"
+                    value={formData.date} onChange={handleChange}
+                    className="w-full border p-2 rounded" />
+
+                  <input type="time" name="time"
+                    value={formData.time} onChange={handleChange}
+                    className="w-full border p-2 rounded" />
+
                 </div>
 
-                <div>
-                  <label className="block text-sm mb-1">Location</label>
-                  <input value={formData.location} readOnly className="w-full border p-2 rounded bg-gray-100" />
-                </div>
+                <input
+                  value={formData.location}
+                  readOnly
+                  placeholder="Location"
+                  className="w-full border p-2 rounded bg-gray-100"
+                />
 
                 <button
                   onClick={handleSubmit}
@@ -247,9 +260,10 @@ const Book = () => {
                 >
                   {loading ? "Saving..." : "Confirm Booking"}
                 </button>
+
               </div>
 
-              {/* SUMMARY (UNCHANGED) */}
+              {/* SUMMARY */}
               <div className="bg-gray-100 p-6 text-sm text-gray-600">
                 <h3 className="font-bold mb-2">Booking Summary</h3>
                 <p><b>Name:</b> {formData.customerName}</p>
