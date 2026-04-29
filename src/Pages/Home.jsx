@@ -18,7 +18,7 @@ import follow7 from '../assets/follow7.jpg';
 import follow8 from '../assets/follow8.jpg';
 
 // Core Page Assets
-import homeHeroImg from '../assets/homeCouresel.png';
+import homeHeroImg from '../assets/homeCouresel.jpeg';
 import homeSubImg from '../assets/homepictureAfterCouresel.webp';
 import comparisonImg from '../assets/chairvskegels.png';
 
